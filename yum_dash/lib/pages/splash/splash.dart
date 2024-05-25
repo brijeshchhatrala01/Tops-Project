@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:yum_dash/pages/login/login.dart';
 import 'package:yum_dash/theme/colors.dart';
 
-import '../../service/firebase_auth/authcheck.dart';
 
 //splashscreen page
 class SplashScreen extends StatefulWidget {

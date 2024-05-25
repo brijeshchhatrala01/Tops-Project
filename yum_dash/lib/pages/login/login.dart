@@ -1,8 +1,6 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-import '../../service/auth_service.dart';
 import '../../service/firebase_auth/authcheck.dart';
 import '../../theme/colors.dart';
 import '../homepae/homepage.dart';
