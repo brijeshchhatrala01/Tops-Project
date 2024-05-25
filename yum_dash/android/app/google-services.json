@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "599459219695",
+    "project_id": "yum-dash-app",
+    "storage_bucket": "yum-dash-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599459219695:android:1e2cf55161799ec10f731a",
+        "android_client_info": {
+          "package_name": "com.example.yum_dash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599459219695-tehnncku6q0iqpholg1lkjr29lkmf93p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yum_dash",
+            "certificate_hash": "d6694653ac835e69e1fac0f9d109964baa74f08e"
+          }
+        },
+        {
+          "client_id": "599459219695-1ktiom1q7hdicap16iqoge7p5551ji54.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmD4kkHkc0a6zyG5fFrP-gH4rBjA9xlqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599459219695-1ktiom1q7hdicap16iqoge7p5551ji54.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "599459219695-shvtvbgmep40bmn2fa4sant5irjmfigg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.yumDash"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

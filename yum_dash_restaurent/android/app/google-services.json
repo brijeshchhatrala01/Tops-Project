@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "112803331830",
+    "project_id": "restaurent-app-57d15",
+    "storage_bucket": "restaurent-app-57d15.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112803331830:android:0fc48ca0967d78ade276d7",
+        "android_client_info": {
+          "package_name": "com.example.yum_dash_restaurent"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEhrnwseX5ICs5mrKgVedm1srO4ckc6dQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
