@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yum_dash/pages/homepae/delivery/food_item_screen/food_item_screen.dart';
 
 import '../../../appbar/appbar.dart';
 import '../../../appbar/search_appbar.dart';
@@ -83,7 +84,13 @@ class _DeliveryPageState extends State<DeliveryPage> {
                           images.length,
                           (index) => Stack(children: [
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => FoodItemScreen(),
+                                    ));
+                              },
                               child: Card(
                                 child: Column(
                                   children: [

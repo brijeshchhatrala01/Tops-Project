@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yum_dash/pages/cart/cart_screen.dart';
 import 'package:yum_dash/pages/homepae/location/location.dart';
 
 import '../theme/colors.dart';
@@ -65,7 +66,9 @@ class CustomAppBar extends StatelessWidget {
             ],
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              goToCart(context);
+            },
             icon: Icon(
               Icons.shopping_cart_outlined,
               color: lightGreen,
@@ -81,6 +84,14 @@ class CustomAppBar extends StatelessWidget {
         context,
         MaterialPageRoute(
           builder: (context) => LocationPage(),
+        ));
+  }
+
+  void goToCart(BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const CartScreen(),
         ));
   }
 }
