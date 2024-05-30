@@ -1,7 +1,6 @@
 // ignore_for_file: unused_local_variable
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:motion_toast/motion_toast.dart';
 
 import '../../../custom_widgets/custom_widgets.dart';

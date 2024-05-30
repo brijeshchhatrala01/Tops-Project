@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:yum_dash/pages/homepae/delivery/food_item_screen/appbar/appbar.dart';
 import 'package:yum_dash/pages/homepae/delivery/food_item_screen/cart_row/cart_row.dart';
 import 'package:yum_dash/pages/homepae/delivery/food_item_screen/food_detail/food_detail.dart';

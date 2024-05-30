@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'order_card/order_card.dart';
+
 class OrderPage extends StatefulWidget {
   const OrderPage({super.key});
 
@@ -61,11 +63,7 @@ class _OrderPageState extends State<OrderPage> {
           ),
           SliverList(
             delegate: SliverChildListDelegate.fixed(
-              [
-                Center(
-                  child: Image.asset('assets/no_order.png'),
-                )
-              ],
+              List.generate(12, (index) => OrderCard()),
             ),
           ),
         ],

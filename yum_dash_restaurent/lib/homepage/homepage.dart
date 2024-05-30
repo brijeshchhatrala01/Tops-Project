@@ -51,8 +51,8 @@ class _HomepageState extends State<Homepage> {
           ),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.search)),
-          IconButton(onPressed: () => goToMenu(), icon: Icon(Icons.menu))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+          IconButton(onPressed: () => goToMenu(), icon: const Icon(Icons.menu))
         ],
       ),
       body: pages[_selectedIndex],

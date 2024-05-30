@@ -1,11 +1,8 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:multi_select_flutter/chip_field/multi_select_chip_field.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:yum_dash_restaurent/homepage/menu/add_item/custom_textformfield/custom_textformfield.dart';
 import 'package:yum_dash_restaurent/theme/colors.dart';
@@ -95,7 +92,7 @@ class _AddItemState extends State<AddItem> {
                       MultiSelectItem('Carrot', 'Carrot'),
                       MultiSelectItem('Brocolli', 'Brocolli'),
                     ],
-                    initialValue: [],
+                    initialValue: const [],
                     onTap: (p0) {},
                   ),
                 ),

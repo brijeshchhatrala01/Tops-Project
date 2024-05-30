@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:yum_dash/pages/homepae/delivery/food_card/cart_count/cart_count.dart';
 import 'package:yum_dash/theme/colors.dart';
 
@@ -60,7 +60,7 @@ class _CartTileState extends State<CartTile> {
         color: darkGreen,
         borderRadius: BorderRadius.circular(28),
       ),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(

@@ -88,7 +88,7 @@ class _DeliveryPageState extends State<DeliveryPage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => FoodItemScreen(),
+                                      builder: (context) => const FoodItemScreen(),
                                     ));
                               },
                               child: Card(

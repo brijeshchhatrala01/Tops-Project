@@ -23,7 +23,7 @@ class CartScreen extends StatelessWidget {
             child: ListView.builder(
               itemCount: 12,
               itemBuilder: (context, index) {
-                return FoodCard();
+                return const FoodCard();
               },
             ),
           ),

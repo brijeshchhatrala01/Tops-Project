@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'dart:io';
 
@@ -73,7 +75,7 @@ class _IntroScreenState extends State<IntroScreen> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => IntroData(),
+            builder: (context) => const IntroData(),
           ));
     } else {
       showNetworkError();
