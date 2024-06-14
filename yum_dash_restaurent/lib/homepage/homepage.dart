@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_switch/flutter_advanced_switch.dart';
+import 'package:yum_dash_restaurent/homepage/options_screen/option_screen.dart';
 
 import '../theme/colors.dart';
-import 'insight/insight.dart';
-import 'menu/menu.dart';
-import 'order/order.dart';
+import 'insight_screen/insight_screen.dart';
+import 'menu_screen/menu_screen.dart';
+import 'order/order_screen.dart';
 
+//home screen
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
@@ -14,11 +16,11 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  //default index page
+  //default screen index page
   int _selectedIndex = 0;
 
   //change page method
-  void changePage(int index) {
+  void changeScreen(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -27,13 +29,14 @@ class _HomepageState extends State<Homepage> {
   final _controller = ValueNotifier<bool>(false);
 
   List<Widget> pages = const [
-    OrderPage(),
-    MenuPage(),
-    InsightPage(),
+    OrderScreen(),
+    MenuScreen(),
+    InsightScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
+    //get device width
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -44,22 +47,28 @@ class _HomepageState extends State<Homepage> {
           child: AdvancedSwitch(
             width: width * 0.22,
             controller: _controller,
-            activeColor: Colors.lightGreen,
+            activeColor: lightGreen,
             activeChild: const Text('Online'),
-            inactiveColor: Colors.red,
+            inactiveColor: kRed,
             inactiveChild: const Text('Offline'),
           ),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-          IconButton(onPressed: () => goToMenu(), icon: const Icon(Icons.menu))
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: () => goToOptions(context),
+            icon: const Icon(Icons.menu),
+          )
         ],
       ),
       body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedIndex,
           unselectedItemColor: kGrey,
-          onTap: changePage,
+          onTap: changeScreen,
           items: const [
             BottomNavigationBarItem(
                 icon: Icon(Icons.room_service), label: "Orders"),
@@ -71,5 +80,13 @@ class _HomepageState extends State<Homepage> {
     );
   }
 
-  goToMenu() {}
+  //navigate to option screen
+  goToOptions(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const OptionScreen(),
+      ),
+    );
+  }
 }

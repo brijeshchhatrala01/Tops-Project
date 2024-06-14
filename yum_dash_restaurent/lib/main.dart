@@ -1,16 +1,19 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:yum_dash_restaurent/firebase_options.dart';
+import 'package:yum_dash_restaurent/service/auth_check.dart';
+import 'package:yum_dash_restaurent/theme/theme.dart';
 
-import 'intro screen/intro.dart';
-import 'theme/theme.dart';
-
+//main function
 void main() async {
+
+  //initialize flutter app
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
+//root widget
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -18,11 +21,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const IntroScreen(),
+      home: const FirebaseAuthCheck(),
       //set theme according to device
-      theme: MediaQuery.of(context).platformBrightness != Brightness.dark
-          ? ThemeDataApp.ThemeDataLight()
-          : ThemeDataApp.ThemeDataDark(),
+      theme: ThemeDataApp.getTheme(context),
     );
   }
 }

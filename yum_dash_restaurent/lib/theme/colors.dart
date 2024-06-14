@@ -8,7 +8,9 @@ const textFormFieldColor = Colors.lightGreen;
 
 const kBlackColor = Colors.black;
 
-const kAppBarColorDark = Colors.black54;
+const kRed = Colors.red;
+
+const kColorDark = Colors.black54;
 
 const kWhiteColor = Colors.white;
 

@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
-import 'package:yum_dash/pages/login/login.dart';
-import 'package:yum_dash/theme/colors.dart';
+import 'package:yum_dash/theme/theme.dart';
 
+import '../../service/firebase_auth/authcheck.dart';
 
 //splashscreen page
 class SplashScreen extends StatefulWidget {
@@ -28,9 +28,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void goToAuth() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const LoginPage()
-          //FirebaseAuthCheck(),
-          ),
+      MaterialPageRoute(
+        builder: (context) => FirebaseAuthCheck(),
+      ),
     );
   }
 
@@ -88,9 +88,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).brightness == Brightness.dark
-          ? kblackSplash
-          : kWhiteColor,
+      backgroundColor: ThemeDataApp().getBackgroundColor(context),
       body: Center(
         child: Image.asset('assets/logo-color.png'),
       ),

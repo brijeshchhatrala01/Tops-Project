@@ -1,6 +1,8 @@
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:yum_dash/theme/theme.dart';
 
+import '../../service/auth_service.dart';
 import '../../service/firebase_auth/authcheck.dart';
 import '../../theme/colors.dart';
 import '../homepae/homepage.dart';
@@ -14,6 +16,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  //check user is logged in or not
   void goToAuthCheck() {
     Navigator.push(
       context,
@@ -29,6 +32,7 @@ class _LoginPageState extends State<LoginPage> {
   //initial country code
   String _initialSelectedCountryCode = "+91";
 
+  //key for check form validation
   final _key = GlobalKey<FormState>();
 
   @override
@@ -38,9 +42,7 @@ class _LoginPageState extends State<LoginPage> {
     double displayHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).brightness == Brightness.dark
-          ? kblackSplash
-          : kWhiteColor,
+      backgroundColor: ThemeDataApp().getBackgroundColor(context),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Form(
@@ -128,10 +130,10 @@ class _LoginPageState extends State<LoginPage> {
                                 MaterialPageRoute(
                                   builder: (context) => const Homepage(),
                                 ));
-                            // FirebaseAuthService().signInWithPhone(
-                            //   _mobileNumberController.text.trim(),
-                            //   context,
-                            // );
+                            FirebaseAuthService().signInWithPhone(
+                              _mobileNumberController.text.trim(),
+                              context,
+                            );
                           }
                         },
                         child: Container(
@@ -168,9 +170,9 @@ class _LoginPageState extends State<LoginPage> {
                           const Spacer(),
                           GestureDetector(
                             onTap: () {
-                              // FirebaseAuthService()
-                              //   .signInWithGoogleAccount(context)
-                              //   .whenComplete(() => goToAuthCheck());
+                              FirebaseAuthService()
+                                  .signInWithGoogleAccount(context)
+                                  .whenComplete(() => goToAuthCheck());
                             },
                             child: Container(
                               decoration: BoxDecoration(

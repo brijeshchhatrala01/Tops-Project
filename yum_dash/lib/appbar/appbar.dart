@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yum_dash/pages/cart/cart_screen.dart';
 import 'package:yum_dash/pages/homepae/location/location.dart';
+import 'package:yum_dash/theme/theme.dart';
 
 import '../theme/colors.dart';
 
@@ -12,9 +13,7 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      backgroundColor: Theme.of(context).brightness == Brightness.dark
-          ? kAppBarColorDark
-          : kWhiteColor,
+      backgroundColor: ThemeDataApp().getBackgroundColor(context),
       pinned: true,
       automaticallyImplyLeading: false,
       title: Row(

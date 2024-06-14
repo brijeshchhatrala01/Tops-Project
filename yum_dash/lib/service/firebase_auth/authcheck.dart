@@ -12,16 +12,6 @@ class FirebaseAuthCheck extends StatelessWidget {
 
   final _auth = FirebaseAuth.instance;
 
-  //add user to database
-  // Future<void> addUser() async {
-  //   var url = 'https://gleg-span.000webhostapp.com/Zomato/User/add%20user.php';
-  //   var resp = await http.post(Uri.parse(url), body: {
-  //     'email': _auth.currentUser?.email ?? 'null',
-  //     'phone': _auth.currentUser?.phoneNumber ?? 'null',
-  //   });
-  //   debugPrint(resp.statusCode.toString());
-  // }
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(

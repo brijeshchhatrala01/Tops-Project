@@ -1,23 +1,28 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:yum_dash_restaurent/login%20&%20register/ragister.dart';
 
-import '../../login/login.dart';
+import '../../login & register/login.dart';
+
 import '../../theme/colors.dart';
 
 //introduction display
 class IntroData extends StatelessWidget {
   const IntroData({super.key});
 
+  //navigate to login screen
   void goToLoginPage(BuildContext context) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const LoginPage(),
-        ));
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LoginPage(),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    //get the device height
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -120,14 +125,17 @@ class IntroData extends StatelessWidget {
                       left: 16,
                       child: Text(
                         'Create Promotion and Grow \nYour Business',
-                        style: TextStyle(color: kWhiteColor, fontSize: 18),
+                        style: TextStyle(
+                          color: kWhiteColor,
+                          fontSize: 18,
+                        ),
                       ),
                     )
                   ],
                 ),
               ],
               options: CarouselOptions(
-                height: height * 0.8,
+                height: height * 0.7,
                 enlargeCenterPage: true,
                 autoPlay: true,
                 aspectRatio: 1,
@@ -154,8 +162,37 @@ class IntroData extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          GestureDetector(
+            onTap: () => goToRagisterPage(context),
+            child: Container(
+              margin: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(18),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Center(
+                child: Text(
+                  'R A G I S T E R',
+                  style: TextStyle(color: kWhiteColor, fontSize: 18),
+                ),
+              ),
+            ),
+          ),
         ],
+      ),
+    );
+  }
+
+  goToRagisterPage(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const RagisterSceen(),
       ),
     );
   }

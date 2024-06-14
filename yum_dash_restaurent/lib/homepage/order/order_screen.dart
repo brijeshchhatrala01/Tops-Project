@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'order_card/order_card.dart';
 
-class OrderPage extends StatefulWidget {
-  const OrderPage({super.key});
+class OrderScreen extends StatefulWidget {
+  const OrderScreen({super.key});
 
   @override
-  State<OrderPage> createState() => _OrderPageState();
+  State<OrderScreen> createState() => _OrderScreenState();
 }
 
-class _OrderPageState extends State<OrderPage> {
+class _OrderScreenState extends State<OrderScreen> {
   bool isPrepareChipSelected = false;
   bool isReadyChipSelected = false;
   bool isPickedUpChipSelected = false;
@@ -63,7 +63,7 @@ class _OrderPageState extends State<OrderPage> {
           ),
           SliverList(
             delegate: SliverChildListDelegate.fixed(
-              List.generate(12, (index) => OrderCard()),
+              List.generate(12, (index) => const OrderCard()),
             ),
           ),
         ],

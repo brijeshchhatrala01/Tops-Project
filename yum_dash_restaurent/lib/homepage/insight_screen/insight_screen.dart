@@ -1,8 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class InsightPage extends StatelessWidget {
-  const InsightPage({super.key});
+class InsightScreen extends StatelessWidget {
+  const InsightScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

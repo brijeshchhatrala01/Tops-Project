@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:yum_dash_restaurent/homepage/menu/add_item/add_item.dart';
-
-import '../../theme/colors.dart';
+import 'package:yum_dash_restaurent/homepage/menu_screen/add_item/add_item.dart';
+import 'package:yum_dash_restaurent/theme/theme.dart';
 import 'menu_card/menu_card.dart';
 
-class MenuPage extends StatelessWidget {
-  const MenuPage({super.key});
+class MenuScreen extends StatelessWidget {
+  const MenuScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +13,7 @@ class MenuPage extends StatelessWidget {
       body: CustomScrollView(slivers: [
         SliverAppBar(
           floating: true,
-          backgroundColor: Theme.of(context).brightness == Brightness.dark
-              ? kAppBarColorDark
-              : kWhiteColor,
+          backgroundColor: ThemeDataApp().getBackgroundColor(context),
           shape: const ContinuousRectangleBorder(
             borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(42),
@@ -32,7 +29,8 @@ class MenuPage extends StatelessWidget {
                 TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12)),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                     prefixIcon: const Icon(Icons.search),
                     hintText: 'Search item by name',
                   ),

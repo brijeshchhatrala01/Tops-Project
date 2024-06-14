@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
+  final TextEditingController controller;
   final String hintText;
   final IconData prefixIcon;
-  const CustomTextFormField(
-      {super.key, required this.hintText, required this.prefixIcon});
+  final TextInputType? keyboardType;
+  const CustomTextFormField({
+    super.key,
+    required this.controller,
+    required this.hintText,
+    required this.prefixIcon,
+    required this.keyboardType,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      keyboardType: keyboardType,
       validator: (value) => checkValidation(value),
       decoration: InputDecoration(
         border: OutlineInputBorder(

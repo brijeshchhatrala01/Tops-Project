@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yum_dash/theme/colors.dart';
+import 'package:yum_dash/theme/theme.dart';
 
 //search appbar for earch food
 class SearchAppBar extends StatelessWidget {
@@ -18,9 +19,7 @@ class SearchAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: Theme.of(context).brightness == Brightness.dark
-          ? kAppBarColorDark
-          : kWhiteColor,
+      backgroundColor: ThemeDataApp().getBackgroundColor(context),
       pinned: true,
       title: Container(
         decoration: BoxDecoration(

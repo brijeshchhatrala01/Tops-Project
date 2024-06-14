@@ -7,7 +7,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:yum_dash_restaurent/intro%20screen/intro_data/into_data.dart';
 import 'package:yum_dash_restaurent/service/auth_check.dart';
-import 'package:yum_dash_restaurent/theme/colors.dart';
+import 'package:yum_dash_restaurent/theme/theme.dart';
 
 //splashscreen page
 class IntroScreen extends StatefulWidget {
@@ -20,12 +20,11 @@ class IntroScreen extends StatefulWidget {
 class _IntroScreenState extends State<IntroScreen> {
   @override
   void initState() {
-    //call splash method
-    // splashMethod();
     checkConnectivity();
     super.initState();
   }
 
+  //show network error dialogue
   Future<void> showNetworkError() async {
     return showDialog(
       context: context,
@@ -56,6 +55,7 @@ class _IntroScreenState extends State<IntroScreen> {
     );
   }
 
+  //navigate to auth checking screen after 3 seconds
   void goToAuthCheck() {
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
@@ -85,9 +85,7 @@ class _IntroScreenState extends State<IntroScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).brightness == Brightness.dark
-          ? kSplashColor
-          : kWhiteColor,
+      backgroundColor: ThemeDataApp().getBackgroundColor(context),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

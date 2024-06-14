@@ -2,6 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../service/firebase_auth/authcheck.dart';
 
@@ -24,15 +25,29 @@ class GetOTP extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextFormField(
+              PinCodeTextField(
                 controller: _otpController,
-                autofocus: true,
+                animationCurve: Easing.legacy,
                 keyboardType: TextInputType.number,
-                keyboardAppearance: Brightness.dark,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter OTP',
+                appContext: context,
+                obscureText: false,
+                validator: (value) {
+                  return value!.length != 6 ? 'please enter otp' : null;
+                },
+                onChanged: (value) {},
+                onCompleted: (value) {},
+                onEditingComplete: () {},
+                onSubmitted: (value) {},
+                length: 6,
+                pinTheme: PinTheme(
+                  activeColor: Theme.of(context).primaryColorLight,
+                  activeFillColor: Theme.of(context).primaryColorDark,
+                  inactiveColor: Theme.of(context).primaryColor,
+                  selectedColor: Theme.of(context).primaryColor,
+                  shape: PinCodeFieldShape.box,
+                  borderRadius: BorderRadius.circular(6),
                 ),
+                cursorColor: Theme.of(context).primaryColor,
               ),
               const SizedBox(
                 height: 18,

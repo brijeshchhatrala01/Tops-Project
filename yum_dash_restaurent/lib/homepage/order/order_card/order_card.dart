@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:yum_dash_restaurent/theme/theme.dart';
 
-import '../../../theme/colors.dart';
 
+//Order card
 class OrderCard extends StatefulWidget {
   const OrderCard({super.key});
 
@@ -15,17 +16,16 @@ class _OrderCardState extends State<OrderCard> {
 
   @override
   Widget build(BuildContext context) {
+    //get device height
     final height = MediaQuery.of(context).size.height;
     return GestureDetector(
-      onTap: () => null,
+      onTap: () {},
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Container(
           height: height * 0.2,
           decoration: BoxDecoration(
-            color: Theme.of(context).brightness == Brightness.dark
-                ? kBlackColor
-                : kWhiteColor,
+            color: ThemeDataApp().getBackgroundColor(context),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Row(
@@ -36,7 +36,7 @@ class _OrderCardState extends State<OrderCard> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 28,
                     child: RatingBar.builder(
                       initialRating: 2,

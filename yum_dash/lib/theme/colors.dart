@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const primaryColorDark = Colors.lightGreen;
+const primaryColorDark = Colors.green;
 
 const primaryColorWhite = Colors.lightGreen;
 
@@ -8,18 +8,24 @@ const textFormFieldColor = Colors.lightGreen;
 
 const kBlackColor = Colors.black;
 
-const kAppBarColorDark = Colors.black54;
+const kRed = Colors.red;
+
+Color kGolden = Colors.yellowAccent.shade400;
+
+const kColorDark = Colors.black54;
 
 const kWhiteColor = Colors.white;
+
+const darkGreen = Colors.green;
+
+const kWhiteAppBar = Colors.white60;
 
 const kGrey = Colors.grey;
 
 const kHomepageBG = Colors.white70;
 
+const kBlue = Colors.blue;
+
 var lightGreen = Colors.lightGreen;
 
-var darkGreen = Colors.green.shade900;
-
-var kGolden = Colors.amber.shade400;
-
-var kblackSplash = Colors.grey.shade800;
+var kSplashColor = Colors.grey.shade800;
