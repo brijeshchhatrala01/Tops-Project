@@ -1,12 +1,51 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
 import '../../../theme/colors.dart';
+import '../edit_food_item/edit_food_item.dart';
 
-class MenuCard extends StatelessWidget {
-  const MenuCard({super.key});
+class MenuCard extends StatefulWidget {
+  final String foodId;
+  final String foodName;
+  final String foodDiscription;
+  final String foodPrice;
+  final String foodImage;
+  final String foodCatagory;
+  final String isRecommanded;
+  final String inStock;
+
+  const MenuCard({
+    super.key,
+    required this.foodId,
+    required this.foodName,
+    required this.foodDiscription,
+    required this.foodImage,
+    required this.foodPrice,
+    required this.foodCatagory,
+    required this.isRecommanded,
+    required this.inStock,
+  });
+
+  @override
+  State<MenuCard> createState() => _MenuCardState();
+}
+
+class _MenuCardState extends State<MenuCard> {
+  late bool foodInStock;
+
+  late bool foodIsRecommanded;
+
+  @override
+  void initState() {
+    foodInStock = widget.inStock == 0 ? false : true;
+    foodIsRecommanded = widget.isRecommanded == 0 ? false : true;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(foodInStock.toString());
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
@@ -25,38 +64,30 @@ class MenuCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
-                    'assets/veg_logo.jpg',
+                    widget.foodCatagory.toString() != 'non-veg'
+                        ? 'assets/veg_logo.jpg'
+                        : 'assets/non_veg.png',
                     width: 24,
                     height: 24,
                   ),
-                  const Text(
-                    'Vegetable Salad',
-                    style: TextStyle(
+                  Text(
+                    widget.foodName,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),
                   ),
-                  const Text(
-                    '₹150.00',
-                    style: TextStyle(color: Colors.grey),
+                  Text(
+                    '₹${widget.foodPrice}',
+                    style: const TextStyle(color: Colors.grey),
                   ),
-                  const Text(
-                      'This is the description of this item \nand it will only have two line')
+                  Text(widget.foodDiscription)
                 ],
               ),
-              Stack(
-                children: [
-                  Image.asset(
-                    'assets/logo_zomato.png',
-                    width: 92,
-                    height: 92,
-                  ),
-                  const Positioned(
-                      top: 0,
-                      right: 0,
-                      child:
-                          IconButton(onPressed: null, icon: Icon(Icons.image)))
-                ],
+              Image.network(
+                widget.foodImage,
+                width: 92,
+                height: 92,
               )
             ],
           ),
@@ -68,11 +99,27 @@ class MenuCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Row(
+              Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(onPressed: null, icon: Icon(Icons.thumb_up)),
-                  Text('Recommend')
+                  IconButton(
+                    onPressed: () async {
+                      foodIsRecommanded = !foodIsRecommanded;
+                      await updateFoodIsRecommanded(
+                          widget.foodId, foodIsRecommanded);
+                      setState(() {});
+                    },
+                    icon: foodIsRecommanded
+                        ? const Icon(
+                            Icons.thumb_up,
+                            color: kBlue,
+                          )
+                        : const Icon(
+                            Icons.thumb_up,
+                            color: kGrey,
+                          ),
+                  ),
+                  const Text('Recommend')
                 ],
               ),
               Row(
@@ -81,23 +128,65 @@ class MenuCard extends StatelessWidget {
                   Transform.scale(
                     scale: 0.8,
                     child: Switch(
-                      value: false,
-                      onChanged: (value) {},
+                      activeColor: lightGreen,
+                      value: foodInStock,
+                      onChanged: (value) async {
+                        foodInStock = !foodInStock;
+                        await updateFoodInStock(widget.foodId, foodInStock);
+                        setState(() {});
+                      },
                     ),
                   ),
                   const Text('In Stock'),
                 ],
               ),
-              const Row(
+              Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  IconButton(onPressed: null, icon: Icon(Icons.edit)),
-                  Text('Edit'),
+                  IconButton(
+                      onPressed: () => goToEditFoodItem(context),
+                      icon: const Icon(
+                        Icons.edit,
+                        color: kGrey,
+                      )),
+                  const Text('Edit'),
                 ],
               )
             ],
           )
         ],
+      ),
+    );
+  }
+
+  Future updateFoodInStock(String foodId, bool foodInStock) async {
+    var url = Uri.parse(
+        'https://gleg-span.000webhostapp.com/yum_dash/menu/updateFoodStock.php');
+    var res = await http.post(url, body: {
+      'id': foodId,
+      'food_in_stock': foodInStock == true ? 1.toString() : 0.toString()
+    });
+    debugPrint(
+        'widget ${widget.inStock} ID : ${foodId} , foodInStock : ${foodInStock.toString()} Response after stock update : ${res.statusCode}');
+  }
+
+  Future updateFoodIsRecommanded(String foodId, bool foodIsRecommanded) async {
+    var url = Uri.parse(
+        'https://gleg-span.000webhostapp.com/yum_dash/menu/updateFoodRecommanded.php');
+    var res = await http.post(url, body: {
+      'id': foodId,
+      'food_is_recommanded':
+          foodIsRecommanded == true ? 1.toString() : 0.toString()
+    });
+    debugPrint(
+        'widget ${widget.inStock} ID : ${foodId} , foodInStock : ${foodIsRecommanded.toString()} Response after stock update : ${res.statusCode}');
+  }
+
+  goToEditFoodItem(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditFoodItem(foodId: widget.foodId),
       ),
     );
   }

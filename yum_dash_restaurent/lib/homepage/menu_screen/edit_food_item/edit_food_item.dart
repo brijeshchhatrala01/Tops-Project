@@ -1,5 +1,6 @@
-// ignore_for_file: unused_element
+// ignore_for_file: unused_element, unused_local_variable
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -11,14 +12,24 @@ import 'package:yum_dash_restaurent/homepage/menu_screen/menu_screen.dart';
 import 'package:yum_dash_restaurent/theme/colors.dart';
 import 'package:http/http.dart' as http;
 
-class AddItem extends StatefulWidget {
-  const AddItem({super.key});
+class EditFoodItem extends StatefulWidget {
+  final String foodId;
+  const EditFoodItem({super.key, required this.foodId});
 
   @override
-  State<AddItem> createState() => _AddItemState();
+  State<EditFoodItem> createState() => _EditFoodItemState();
 }
 
-class _AddItemState extends State<AddItem> {
+class _EditFoodItemState extends State<EditFoodItem> {
+  String imgUrl =
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS789NyUdpX3QENXM1a9d3367Dq5eU-EW_76A&s';
+
+  @override
+  void initState() {
+    getFoodData();
+    super.initState();
+  }
+
   //veg-non veg switch value
   final _controllerSwitch = ValueNotifier<bool>(false);
 
@@ -58,10 +69,10 @@ class _AddItemState extends State<AddItem> {
                     //select image from gallary
                     onTap: () => pickImage(),
                     child: _file.path.isEmpty
-                        ? Image.asset(
+                        ? Image.network(
                             width: width * 0.4,
                             height: height * 0.3,
-                            'assets/blank_image.png',
+                            imgUrl,
                             fit: BoxFit.contain,
                           )
                         : Image.file(
@@ -111,7 +122,6 @@ class _AddItemState extends State<AddItem> {
                       onSelectionChanged: (value) {
                         setState(() {
                           _ingridientSet = value;
-                          print(_ingridientSet);
                         });
                       },
                     )),
@@ -154,11 +164,11 @@ class _AddItemState extends State<AddItem> {
                         //initially true by default
                         food_is_recommanded: 1,
                       );
-                      await _addFoodItemToMenu(data, _file);
+                      //  await _addFoodItemToMenu(data, _file);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MenuScreen(),
+                          builder: (context) => const MenuScreen(),
                         ),
                       );
                     }
@@ -171,7 +181,7 @@ class _AddItemState extends State<AddItem> {
                     padding: const EdgeInsets.all(16),
                     child: const Center(
                       child: Text(
-                        'A D D',
+                        'U P D A T E',
                         style: TextStyle(color: kWhiteColor, fontSize: 16),
                       ),
                     ),
@@ -213,6 +223,23 @@ class _AddItemState extends State<AddItem> {
 
     var response = await req.send();
     debugPrint('Response : ${response.statusCode}');
+  }
+
+  getFoodData() async {
+    var url = Uri.parse(
+        'https://gleg-span.000webhostapp.com/yum_dash/menu/getFoodItemById.php');
+    var resp = await http.post(url, body: {
+      'id': widget.foodId,
+    });
+    var listData = jsonDecode(resp.body);
+    setState(() {
+      imgUrl = listData[0]['food_image'];
+      _controllerSwitch.value = listData[0]['veg'] == 'veg' ? false : true;
+      _controllerFoodName.text = listData[0]['food_name'];
+      _controllerFoodDiscription.text = listData[0]['food_discription'];
+      _controllerFoodPrice.text = listData[0]['food_price'];
+    });
+    debugPrint(resp.body);
   }
 }
 

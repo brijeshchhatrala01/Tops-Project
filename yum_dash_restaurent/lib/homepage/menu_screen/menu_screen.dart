@@ -1,11 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:yum_dash_restaurent/homepage/menu_screen/add_item/add_item.dart';
 import 'package:yum_dash_restaurent/theme/theme.dart';
 import 'menu_card/menu_card.dart';
+import 'package:http/http.dart' as http;
 
-class MenuScreen extends StatelessWidget {
+class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
 
+  @override
+  State<MenuScreen> createState() => _MenuScreenState();
+}
+
+class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -52,21 +60,49 @@ class MenuScreen extends StatelessWidget {
             ),
           ),
         ),
-        SliverList.builder(
-          itemCount: 7,
-          itemBuilder: (context, index) {
-            return const MenuCard();
-          },
-        ),
+        SliverFillRemaining(
+          child: FutureBuilder<List>(
+            future: getMenuFromDatabase(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return CustomScrollView(
+                  slivers: [
+                    SliverList.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        return MenuCard(
+                          foodId: snapshot.data![index]['id'],
+                          foodName: snapshot.data![index]['food_name'],
+                          foodDiscription: snapshot.data![index]
+                              ['food_discription'],
+                          foodImage: snapshot.data![index]['food_image'],
+                          foodPrice: snapshot.data![index]['food_price'],
+                          foodCatagory: snapshot.data![index]['food_catagory'],
+                          isRecommanded: snapshot.data![index]
+                              ['food_is_recommanded'],
+                          inStock: snapshot.data![index]['food_in_stock'],
+                        );
+                      },
+                    )
+                  ],
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          ),
+        )
       ]),
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: () => goToAddItem(context),
-          label: const Row(
-            children: [
-              Icon(Icons.add),
-              Text('ADD'),
-            ],
-          )),
+        onPressed: () => goToAddItem(context),
+        label: const Row(
+          children: [
+            Icon(Icons.add),
+            Text('ADD'),
+          ],
+        ),
+      ),
     );
   }
 
@@ -77,5 +113,14 @@ class MenuScreen extends StatelessWidget {
         builder: (context) => const AddItem(),
       ),
     );
+  }
+
+  Future<List> getMenuFromDatabase() async {
+    var url = Uri.parse(
+        'https://gleg-span.000webhostapp.com/yum_dash/menu/get_menu_items.php');
+    var req = await http.get(url);
+
+    // debugPrint('Menu Data : ${jsonDecode(req.body)}');
+    return jsonDecode(req.body);
   }
 }
